@@ -64,7 +64,8 @@ Follow these steps to set up the chatbot locally:
 - "What is Acromegaly?"
 
 
-![Alt Text]( C:\Users\nandh\Chatbot\assests\image.png "Chat")
+![Chatbot Screenshot](assests\image.png "Chatbot Interface Screenshot")
+
 
 
 
