@@ -64,7 +64,7 @@ Follow these steps to set up the chatbot locally:
 - "What is Acromegaly?"
 
 
-![Chatbot Screenshot](assests\image.png "Chatbot Interface Screenshot")
+![Chatbot Screenshot](assests/image.png "Chatbot Interface Screenshot")
 
 
 
