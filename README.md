@@ -64,18 +64,8 @@ Follow these steps to set up the chatbot locally:
 - "What is Acromegaly?"
 
 
-MedicalChatbot/
-│
-├── app.py                  # Main Flask application
-├── templates/
-│   └── chat.html           # Frontend template
-├── static/
-│   ├── css/                # Stylesheets
-│   ├── js/                 # JavaScript files
-│   └── images/             # Images used in the project
-├── requirements.txt        # Python dependencies
-├── .env                    # API keys and environment variables
-└── README.md               # Documentation
+![Alt Text]( C:\Users\nandh\Chatbot\assests\image.png "Chat")
+
 
 
 ## How It Works
