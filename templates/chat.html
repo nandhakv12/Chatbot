@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Medical Chatbot</title>
+    <!-- Include Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <style>
+        /* General Chat Window Styling */
+        .chat {
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .msg_head {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .msg_card_body {
+            overflow-y: auto;
+            height: 400px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            position: relative;
+        }
+
+        .msg_cotainer_send {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin-right: 10px;
+            max-width: 60%;
+        }
+
+        .msg_cotainer {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 10px;
+            margin-left: 10px;
+            max-width: 60%;
+        }
+
+        .user_img, .user_img_msg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .online_icon {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: green;
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+
+        .card-footer {
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .typing-indicator {
+            font-style: italic;
+            font-size: 14px;
+            color: gray;
+            display: flex;
+            align-items: center;
+        }
+
+        .typing-dots span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin: 0 2px;
+            background: gray;
+            border-radius: 50%;
+            animation: blink 1.2s infinite;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes blink {
+            0%, 80%, 100% {
+                opacity: 0;
+            }
+            40% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center h-100">
+            <div class="col-md-8 col-xl-6 chat">
+                <div class="card">
+                    <div class="card-header msg_head">
+                        <div class="d-flex align-items-center">
+                            <div class="img_cont">
+                                <img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" class="rounded-circle user_img">
+                                <span class="online_icon"></span>
+                            </div>
+                            <div class="user_info ml-2">
+                                <span>Medical Chatbot</span>
+                                <p>Ask me anything! I'm here to help.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="messageFormeight" class="card-body msg_card_body">
+                        <!-- Chat Messages Go Here -->
+                    </div>
+                    <div id="typingIndicator" class="typing-indicator" style="display: none;">
+                        Bot is typing <div class="typing-dots"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="card-footer">
+                        <form id="messageArea" class="input-group">
+                            <input type="text" id="text" name="msg" placeholder="Type your message..." autocomplete="off" class="form-control type_msg" required />
+                            <div class="input-group-append">
+                                <button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#messageArea").on("submit", function(event) {
+                event.preventDefault();
+
+                const date = new Date();
+                const str_time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                const rawText = $("#text").val();
+
+                // Append user message
+                const userHtml = `
+                    <div class="d-flex justify-content-end mb-4">
+                        <div class="msg_cotainer_send">
+                            ${rawText}
+                            <span class="msg_time_send">${str_time}</span>
+                        </div>
+                        <div class="img_cont_msg">
+                            <img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" class="rounded-circle user_img_msg">
+                        </div>
+                    </div>`;
+                $("#text").val("");
+                $("#messageFormeight").append(userHtml);
+
+                // Show typing indicator
+                $("#typingIndicator").show();
+
+                // Simulate bot response with AJAX
+                $.ajax({
+                    data: { msg: rawText },
+                    type: "POST",
+                    url: "/get",
+                }).done(function(data) {
+                    // Append bot message
+                    const botHtml = `
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="img_cont_msg">
+                                <img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" class="rounded-circle user_img_msg">
+                            </div>
+                            <div class="msg_cotainer">
+                                ${data}
+                                <span class="msg_time">${str_time}</span>
+                            </div>
+                        </div>`;
+                    $("#messageFormeight").append($.parseHTML(botHtml));
+                    $("#typingIndicator").hide();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
