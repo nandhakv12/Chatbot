@@ -2,20 +2,16 @@
 
 A conversational AI chatbot designed to assist with medical inquiries and provide general information about medical conditions, symptoms, and treatments. It utilizes state-of-the-art NLP models to deliver accurate and contextually relevant responses in real-time.
 
----
-
 ## Table of Contents
 1. [Features](#features)
 2. [Tech Stack](#tech-stack)
 3. [Installation](#installation)
 4. [Usage](#usage)
-5. [File Structure](#file-structure)
-6. [How It Works](#how-it-works)
+5. [How It Works](#how-it-works)
+6. [Code Example](#code-example)
 7. [Future Enhancements](#future-enhancements)
 8. [License](#license)
 9. [Acknowledgments](#acknowledgments)
-
----
 
 ## Features
 - **User-Friendly Chat Interface**:
@@ -26,24 +22,25 @@ A conversational AI chatbot designed to assist with medical inquiries and provid
   - Answers queries related to symptoms, treatments, and medical conditions.
   - Provides first-aid tips and general health advice.
 
+- **Advanced Search and Retrieval**:
+  - Utilizes LLM-based retrieval-augmented generation (RAG) to enhance response quality.
+  - Implements a vector database (Pinecone) for efficient semantic search.
+
 - **Customizable API Integration**:
   - Integrates with OpenAI GPT for contextual responses.
   - Built with Flask for flexibility and scalability.
-
----
 
 ## Tech Stack
 - **Backend**:
   - Flask: Handles API requests and chatbot logic.
   - Python: Core programming language.
   - NLP Libraries: Hugging Face Transformers, spaCy.
+  - Pinecone: Vector database for semantic search.
 
 - **Frontend**:
   - HTML5, CSS3: UI structure and styling.
   - Bootstrap 4: Responsive and modern UI components.
   - JavaScript (jQuery): Real-time interactions.
-
----
 
 ## Installation
 Follow these steps to set up the chatbot locally:
